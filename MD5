@@ -1,0 +1,16 @@
+aa42e0140df865823e286411f486f283 *DESCRIPTION
+723320e9b50d60007a84b6cb37d5037f *NAMESPACE
+979839be7817af72a754664945fb4833 *R/engine.R
+c72761e151fc6b0d5336a5f1e7edc38f *R/pikchrWrappers.R
+9e8be72bb34f7b9d602c645b6f9f7e9d *R/zzz.R
+02e8d5ca0674bd75c9cbf68e9d4a3aa5 *build/vignette.rds
+c039794049a2eab5695830eae8776079 *inst/doc/Examples.R
+7b0f77b301eb6f5b1c7d0a6755b8df26 *inst/doc/Examples.Rmd
+9be2e840a7881e9a1fe5e8376664f7e7 *inst/doc/Examples.html
+5e31db2f4e583a8aeaf1df851e36798f *man/eng_pikchr.Rd
+699e2be26916592b8f1290a3bb98b5b3 *man/eng_pikchr_validate_options.Rd
+6441f28511b9093afeb893919a07cc73 *man/pikchr.Rd
+75cbf6501368e358c4b9995663444822 *man/run_hook_plot.Rd
+3a67da75ca9d13f47e637d53b735f646 *src/init.c
+03c405a0e6d3de55d75af176ef384ff7 *src/pikchr.c
+7b0f77b301eb6f5b1c7d0a6755b8df26 *vignettes/Examples.Rmd
