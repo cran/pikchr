@@ -30,25 +30,35 @@
 #' @import utils
 #' @import stringr
 #' @import rsvg
+#' @import dplyr
 #' @importFrom stringr str_replace
 #' @importFrom htmltools HTML tags browsable
 #' @export 
 pikchr <- function(code, 
-                   width = "75%", 
-                   height = "auto", 
-                   fontSize = "80%",
-                   fontFamily = 'Arial',
+                   width = NULL, 
+                   height = NULL, 
+                   fontSize = "100%",
+                   fontFamily = 'Jost',
                    class = "pikchr",
                    align = "none",
                    css = NULL,
                    margin = NULL,
                    svgOnly = FALSE) {
+  code_clean <- stringr::str_replace_all(code, "\\\\*\\s*\\n\\s*then", " then")
   
-  result <- .Call("pikchr_c", code, class)
+  result <- .Call("pikchr_c", code_clean, class)
   
   if (is.null(margin)) {
     margin = "10px 0 10px 0"
   }
+  
+  viewbox <- stringr::str_extract(result, "(?<=(viewBox=\")).*(?=(\">))")
+  bbox <- as.numeric(stringr::str_split(viewbox, "\\s", simplify = TRUE))
+  bbox_height <- bbox[4] - bbox[2]
+  bbox_width <-  bbox[3] - bbox[1]
+  
+  if (is.null(width)) width <- bbox_width
+  if (is.null(width)) width <- bbox_height
   
   styles  = paste0("style='width:", width, 
                    ";height:", height, 
@@ -71,8 +81,36 @@ pikchr <- function(code,
     result <- paste0("<div class = \"container_", class, "\" style=\"text-align:", align, ';">', result, "</div>")
   }
   
+  #data("google_fonts", package =  "pikchr")
+  font_styles <- google_fonts %>% dplyr::filter(family == fontFamily) %>% dplyr::pull	(styles)
+  if (length(font_styles) == 1L) {
+    result <- stringr::str_replace(result, pattern = "(<svg.*?>)",
+                                   replacement = paste0("\\1", '<def><style type="text/css">@import url(https://fonts.googleapis.com/css2?family=', stringr::str_replace_all(fontFamily, "\\s", "+"), font_styles, ');</style></def>'))
+  } else {
+    if (fontFamily != "inherit") message("Google font not founded, check the spelling. Using inherit.")
+  }
+
   if (!svgOnly) {
     return(htmltools::browsable(htmltools::tags$html(htmltools::HTML(result))))
   } else
     return(htmltools::HTML(result))
 }
+
+
+#' Google Font List
+#'
+#' List of fonts and its stytles on google fonts site.
+#' Report ...
+#'
+#' @format ## `google_fonts`
+#' A data frame with 1,718 rows and 2 columns:
+#' \describe{
+#'   \item{family}{Font family names}
+#'   \item{styles}{Font styles}
+#' }
+#' @source <https://fonts.google.com>
+"google_fonts"
+
+
+## quiets concerns of R CMD check re: the .'s that appear in pipelines
+if(getRversion() >= "4.1.0")  utils::globalVariables(c("."))

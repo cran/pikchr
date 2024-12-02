@@ -6,10 +6,10 @@
 \usage{
 pikchr(
   code,
-  width = "75\%",
-  height = "auto",
-  fontSize = "80\%",
-  fontFamily = "Arial",
+  width = NULL,
+  height = NULL,
+  fontSize = "100\%",
+  fontFamily = "Jost",
   class = "pikchr",
   align = "none",
   css = NULL,

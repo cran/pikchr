@@ -1,8 +1,8 @@
 Type: Package
 Package: pikchr
 Title: R Wrapper for 'pikchr' (PIC) Diagram Language
-Version: 0.97
-Date: 2024-09-25
+Version: 1.0
+Date: 2024-12-01
 Authors@R: c(
             person("Andre", "Leite", email = "leite@castlab.org", role = c("aut", "cre")),
             person("Hugo", "Vaconcelos", email = "hugo.vasconcelos@ufpe.br", role = "aut"),
@@ -13,16 +13,20 @@ License: GPL (>= 2)
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
-Imports: knitr, brio, htmltools, rlang, purrr, stringr, rsvg
+Imports: dplyr, knitr, brio, htmltools, rlang, purrr, stringr, rsvg
+Suggests: kableExtra, tidyverse
 URL: <https://github.com/StrategicProjects/pikchr>
 Note: This package makes use of the 'pikchr' source code created by
         Richard Hipp (<https://pikchr.org>).
+Depends: R (>= 4.0)
+LazyData: true
+Config/Needs/website: tidyverse/tidytemplate, rmarkdown
 NeedsCompilation: yes
-Packaged: 2024-09-27 11:33:45 UTC; leite
+Packaged: 2024-12-02 12:16:10 UTC; leite
 Author: Andre Leite [aut, cre],
   Hugo Vaconcelos [aut],
   Richard Hipp [ctb],
   Brian Kernighan [ctb]
 Maintainer: Andre Leite <leite@castlab.org>
 Repository: CRAN
-Date/Publication: 2024-09-30 16:40:02 UTC
+Date/Publication: 2024-12-02 12:30:35 UTC

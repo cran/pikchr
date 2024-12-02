@@ -8,7 +8,7 @@
 #'
 #' @details
 #' The `eng_pikchr` function allows you to use Pikchr code inside R Markdown documents, rendering it as an image.
-#' It supports options like `width`, `height`, `font size`, `font family`, and CSS classes to customize the output.
+#' It supports options like `width`, `height`, font `size`, font `family`, and CSS classes to customize the output.
 #' The function automatically detects the output format (HTML or LaTeX) and generates the appropriate image.
 #' 
 #' If the output is LaTeX, the SVG is converted to PNG using the `rsvg_png()` function.
@@ -20,6 +20,7 @@
 #' - `height`: Height of the rendered image (default `"auto"`).
 #' - `size`: Font size for the Pikchr diagram (default `"100%"`).
 #' - `family`: Font family for the Pikchr diagram (default `"inherit"`).
+#' - `align`: Figure align: left, right, center.
 #' - `css`: Additional CSS for customizing the Pikchr diagram.
 #' - `class`: CSS class to apply to the diagram (default `"pikchr"`).
 #' - `margin`: CSS margin around the image (default `"10px 0 10px 0"`).
@@ -42,38 +43,40 @@ eng_pikchr = function(options) {
   echo <- options$echo
   width <- options$width
   height <- options$height
-  size <- options$size
-  family <- options$family
+  size <- options$fontSize
+  family <- options$fontFamily
+  align <- options$align
   css <- options$css
-  class <- paste(options$class, options$label)
+  class <- paste("inline-svg", options$class, options$label)
   margin <- options$margin
   lang <- options$lang
   code <- paste0(options$code, collapse = " \n")
-  piksvg <- pikchr(code, 
-                   width = ifelse(is.null(width), "80%", width),
-                   height = ifelse(is.null(height), "auto", height),
+  piksvg <- pikchr(code,
+                   width = width,
+                   height = height,
                    fontSize = ifelse(is.null(size) | (size == "normalsize"), "100%", size),
                    fontFamily = ifelse(is.null(family), "inherit", family),
+                   align = ifelse(is.null(align), "center", align),
                    class = ifelse(is.null(class), "pikchr", paste("pikchr", class)),
                    css = css, #ifelse(is.null(css), "", css),
                    margin = ifelse(is.null(margin), "10px 0 10px 0", margin),
                    svgOnly = TRUE
   )
-  
-  
+
+
   fig <- tempfile(fileext = ".svg")
   brio::write_lines(piksvg, fig)
-  
-  if (knitr::is_latex_output() & (!knitr::is_html_output())) {
-    png  <- tempfile(fileext = ".png")
-    rsvg::rsvg_png(svg = fig, file = png)
-    fig <- png
-  }
-  
-  options$fig.num = 1L; options$fig.cur = 1L
-  extra = run_hook_plot(fig, options)
-  options$engine <- 'c'
-  knitr::engine_output(options, options$code, '', extra)
+
+  options$fig.num = 1L;
+  options$fig.cur = 1L
+  options$engine <- 'r'
+
+  if (echo)
+    code <- options$code
+  else
+    code <- ''
+
+  knitr::engine_output(options, code, '', piksvg)
 }
 
 
@@ -123,8 +126,44 @@ eng_pikchr_validate_options <- function(options) {
 #'
 #' @return The result of calling the current Knitr plot hook with the specified plot file and options.
 #' @keywords internal
-run_hook_plot = function(x, options) {
+run_hook_plot <- function(x, options) {
+  
+  if (!file.exists(x)) {
+    stop(sprintf("File not found: %s", x))
+  }
+  
+  
   opts_knit$append(plot_files = x)
-  hook = knit_hooks$get('plot')
-  hook(x, options)
+  
+
+  hook <- knit_hooks$get('plot')
+  
+  # Garante que o hook está definido
+  if (is.null(hook)) {
+    stop("No hook defined in Knitr.")
+  }
+  
+  
+  if (!is.null(options$align)) {
+    options$fig.align <- options$align
+  }
+  
+  # Executa o hook de plot
+  tryCatch(
+    hook(x, options),
+    error = function(e) {
+      stop(sprintf("Error on plot: %s", e$message))
+    }
+  )
 }
+# run_hook_plot = function(x, options) {
+#   opts_knit$append(plot_files = x)
+#   hook = knit_hooks$get('plot')
+#   hook(x, options)
+# }
+
+
+# set engines for interpreted languages
+local({
+   knit_engines$set(setNames(list(eng_pikchr), 'pikchr'))
+})

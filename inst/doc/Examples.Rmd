@@ -1,19 +1,20 @@
 ---
-title: "Pikchr Diagram Examples"
-author: "André Leite"
-date: "`r Sys.Date()`"
+title: "Examples"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Pikchr Diagram Examples}
+  %\VignetteIndexEntry{Examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+```
+
+```{r setup}
 library(pikchr)
 ```
 
@@ -23,10 +24,12 @@ library(pikchr)
 
 
 
-
 ### Example 1
 
 ```{pikchr}
+#| fontFamily: Abel
+# fontFamily: Abel
+
 /*
  Example 1. André Leite (leite@castlab.org)
  */
@@ -48,15 +51,22 @@ library(pikchr)
 ### Example 2
 
 ```{pikchr}  
+#| width: 80%
+
 /*
  Example 2. André Leite (leite@castlab.org)
  */
+  
 dimen_= .75
 Origem:(0,0) 
 B1:box "Agente" "Externo";
-L1:line -> from B1.s down dimen_/4 then left 1.5*dimen_ then down dimen_/4; 
+L1:line -> from B1.s down dimen_/4 \
+  then left 1.5*dimen_ \
+  then down dimen_/4; 
 B2:box wid 1 "Sensores" "Digitais";
-L2:line -> from B1.s down dimen_/4 then right 1.5*dimen_ then down dimen_/4;
+L2:line -> from B1.s down dimen_/4 \
+  then right 1.5*dimen_ \
+  then down dimen_/4;
 B3:box wid 1 "Sensores" "Analógicos";
 L3:line -> from B2.s down dimen_/2;
 B4:box wid 1 "Transmissor" "FSK";
@@ -67,35 +77,47 @@ B6:box wid 1 "Receptor" "FSK";
 L6:line -> from B5.s down dimen_/2; 
 B7:box wid 1 "Receptor" "FM";
 L7:line -> from B6.s down .5*dimen_ then right 4.5*dimen_ \  
-    then up 3*dimen_ then right .5*dimen_ 
+  then up 3*dimen_ \
+  then right .5*dimen_ 
 L8:line -> from B7.s down .25*dimen_ then right 1.25*dimen_ \  
-    then up 3*dimen_  then right .75*dimen_
-B8:box wid 1 "Rede" big "Neural" big with .w at 1/2<L7.end, L8.end> fill lightblue
+  then up 3*dimen_ \
+  then right .75*dimen_
+B8:box wid 1 "Rede" big "Neural" big \
+  with .w at 1/2<L7.end, L8.end> fill lightblue
 L9:line -> from B8.e right dimen_;
 B9:box wid 1 "Sistema de" "Controle" "de Acesso";
-L10:line -> from B8.e+(0,boxht/6) right dimen_/2 then up dimen_ then right dimen_/2; 
+L10:line -> from B8.e+(0,boxht/6) right dimen_/2 \ 
+  then up dimen_ then right dimen_/2; 
 B10:box wid 1 "Sistema de" "Alarme";
-L11:line -> from B8.e-(0,boxht/6) right dimen_/2 then down dimen_ then right dimen_/2; 
+L11:line -> from B8.e-(0,boxht/6) right dimen_/2 \ 
+  then down dimen_ then right dimen_/2; 
 B11:box wid 1 "Sistema de" "Anúncio";         
 ```  
       
 ### Example 3
 
 ```{pikchr}  
+#| fontFamily: Jost
+#| width: 100%
+#| fontSize: 75%
 /*
  Example 3. André Leite (leite@castlab.org)
  */
-               $len = 175px;
-               margin = 20px;
+$len = 175px;
+margin = 20px;
 /* First Stage */
           B1E: box rad 5px wid 2*$len fill white;
     LineCusto: line <- from B1E.n - ((2/3)*$len,0) up .25*$len;
      BoxCusto: box rad 5px "Custo" wid .5*$len ht .25*$len fill 0xFFD320;
-LineDistancia: line <- thick from BoxCusto.w + (0,.25*$len/6) left .25*$len/2 \  
-                    then up .25*$len/6 then left .15*$len/2;
+LineDistancia: line <- thick from BoxCusto.w + (0,.25*$len/6) \
+                    left .25*$len/2 \  
+                    then up .25*$len/6 \
+                    then left .15*$len/2;
                box rad 10px "Distância" fit wid .35*$len fill 0xFFD320;
-    LineTempo: line <- thick  from BoxCusto.w - (0,.25*$len/6) left .25*$len/2 \  
-                    then down .25*$len/6  then left .15*$len/2 color gray;
+    LineTempo: line <- thick  from BoxCusto.w - (0,.25*$len/6) \
+                    left .25*$len/2 \  
+                    then down .25*$len/6  then left .15*$len/2 \
+                    color gray;
                box rad 10px "Tempo" fit wid .35*$len fill 0xFFD320;
                text "Primeiro Estágio" bold at B1E.c  color black;
    LineNumMat: line <- from B1E.n - ((0)*$len,0) up .25*$len;
@@ -105,17 +127,22 @@ LineDistancia: line <- thick from BoxCusto.w + (0,.25*$len/6) left .25*$len/2 \
                text "Número de Novas" "Maternidades" at NM.c color white;
                text "Nascimentos" "de risco" at NR.c color white;
 /*Second Stage */
-          B2E: box rad 5px with .n at B1E.s - (0, (.6)*$len) wid 2*$len fill white;
+          B2E: box rad 5px with .n at B1E.s - (0, (.6)*$len) \
+               wid 2*$len fill white;
     LineOfeta: line <- from B2E.n up .2*$len;
-           OF: box rad 10px "Nascimentos" "no município" fit wid .5*$len fill 0xFF420E;
+           OF: box rad 10px "Nascimentos" "no município" fit \
+               wid .5*$len fill 0xFF420E;
   LineDemanda: line <- from B2E.n - ((2/3)*$len,0) up .2*$len;
-           DM: box rad 10px "Nascimentos" "de residentes" fit wid .5*$len fill 0x83CAFF;
-LineResultado: line -> "Polos" aligned above italic from B2E.e right .35*$len;
+           DM: box rad 10px "Nascimentos" "de residentes" \
+               fit wid .5*$len fill 0x83CAFF;
+LineResultado: line -> "Polos" aligned above italic from B2E.e \
+               right .35*$len;
            RS: file "Resultado" bold ht .25*$len wid .5*$len fill 0x579D1C;
    LineSegEst: line -> "Macropolos" above italic aligned from B1E.s + \
                       ((2/3)*$len,0) down .6*$len; 
                text "Segundo Estágio" bold at B2E.c color black;
-           BX: box thin dashed with .c at 1/2<OF.c,DM.c> wid 1.35*$len ht OF.height + .2;
+           BX: box thin dashed with .c at 1/2<OF.c,DM.c> \
+               wid 1.35*$len ht OF.height + .2;
                text "Município" above at BX.n;
 /* Fim */          
 ```
@@ -123,6 +150,9 @@ LineResultado: line -> "Polos" aligned above italic from B2E.e right .35*$len;
 ### Example 4    
     
 ```{pikchr}  
+#| fontFamily: Abel
+#| fontSize: 80%
+ 
 /*
  Example 4. André Leite (leite@castlab.org)
  */
@@ -176,6 +206,7 @@ cell(,3*i/2,-j/2)
 ### Example 6     
     
 ```{pikchr}
+#| fontSize: 80%
 /*
  Example 6. Original from pikchr.org and fossil-scm.org
  */
@@ -217,6 +248,7 @@ C5P: circle "C₅\'"
 ### Example 7 
  
 ```{pikchr}
+#| fontSize: 80%
 /*
  Example 7. Original from pikchr.org and fossil-scm.org
  */
@@ -256,6 +288,7 @@ line thin color gray <-> from X2 to X1 "distância" aligned above small \
 ### Example 8
 
 ```{pikchr}
+#| fontSize: 80%
 /*
  Example 8. Original from pikchr.org and fossil-scm.org
  */
@@ -313,6 +346,7 @@ TC: box same "Test Code"
 
 
 ```{pikchr}
+#| fontSize: 80%
 /*
  Example 9. Original from pikchr.org and fossil-scm.org
  */         
@@ -379,6 +413,7 @@ line right until even with X9 - ($r,0) \
 ### Example 10
   
 ```{pikchr}  
+#| fontSize: 75%
 /*
  Example 10. Original from pikchr.org and fossil-scm.org
  */
@@ -450,6 +485,7 @@ D3: circle same as B3 at B3-(0,2*$laneh) "3"
 ### Example 11
 
 ```{pikchr}         
+#| fontSize: 80%
 /*
  Example 11. Original from pikchr.org and fossil-scm.org
  */         
@@ -474,6 +510,7 @@ ST:     box "symbol" "table"
 ```
  
 ```{pikchr}
+#| fontSize: 80%
 /*
  Exemplo 11. Original em pikchr.org e fossil-scm.org
  */
@@ -505,6 +542,7 @@ Out:      file "pikchr.o" "or" "pikchr.exe" wid 110%
 ### Example 12
 
 ```{pikchr}
+#| fontSize: 60%
 /*
  Example 12 André Leite (leite@castlab.org)
  */
@@ -541,21 +579,25 @@ B9: box "Referral" "to UBS" fit rad .1  wid .5*$width
 L12: line from L10.end + (0, .25) left 1.25 then down .25 ->
 X2: diamond wid .25 ht .25 fill 0x74c476
 L11: line down .125 -> 
-B10: box "Medical Assistance" "within 120 minutes" bold fit rad .1 wid .5*$width
+B10: box "Medical Assistance" "within 120 minutes" bold fit \
+     rad .1 wid .5*$width
 L13: line from L12.nw left 1.25 then down .25 ->
 X3: diamond wid .25 ht .25 fill 0xfaff00
 L12: line down .125 -> 
-B11: box "Medical Assistance" "within 60 minutes" bold fit rad .1  wid .5*$width
+B11: box "Medical Assistance" "within 60 minutes" bold fit \
+     rad .1  wid .5*$width
 L14: line from L13.nw left 1.25 then down .25 ->
 X3: diamond wid .25 ht .25 fill 0xf16913
 L14: line down .125 -> 
-B12: box "Medical Assistance" "within 10 minutes" bold fit rad .1  wid .5*$width 
-        "Emergency?" small at X.s - (0, .075)
+B12: box "Medical Assistance" "within 10 minutes" bold fit \
+     rad .1  wid .5*$width 
+     "Emergency?" small at X.s - (0, .075)
 ```
 
 ### Example 13
 
 ```{pikchr}
+#| fontSize: 70%
 /*
  Example 13. André Leite (leite@castlab.org)
  */         
@@ -653,8 +695,9 @@ box "DER" bold big fit  with .sw at START.end
 ### Example 14
 
 ```{pikchr}
+#| fontSize: 70%
 /*
- Exemplo 14. Original em pikchr.org e fossil-scm.org
+ Exemplo 14. André Leite (leite@castlab.org)
  */
 $r = 0.2in
 linerad = 0.75*$r
@@ -671,7 +714,9 @@ A1: box "secretaria" italic fit fill 0xD7BDE2
 arrow from A0 right 9*$r behind A1
 A2: box "dias" italic fit fill lightyellow
 
-arrow from A1.e right $r*0.5 then up $r*1.8 right $r*1.2 then right until even with A2.w
+arrow from A1.e right $r*0.5 \
+  then up $r*1.8 right $r*1.2 \
+  then right until even with A2.w
 A3: box "inicio" italic fit fill lightyellow
 arrow $r
 A4: box "fim" italic fit fill lightyellow
@@ -792,6 +837,8 @@ box "e-Fisco" bold big fit  with .sw at START.end
 ### Example 15
 
 ```{pikchr}
+#| fontSize: 70%
+
 /*
  Example 15. André Leite (leite@castlab.org)
  */         
@@ -812,7 +859,8 @@ CMD1: [
          arrow from A0 right 9*$r behind A1
          A2: box "dias" italic fit fill lightyellow
          
-         arrow from A1.e right $r*0.5 then up $r*1.8 right $r*1.2 then right until even with A2.w
+         arrow from A1.e right $r*0.5 then up $r*1.8 right $r*1.2 \
+         then right until even with A2.w
          A3: box "inicio" italic fit fill lightyellow
          arrow $r
          A4: box "fim" italic fit fill lightyellow
@@ -888,4 +936,118 @@ TCECTT: [
        
 START: line from TCECTT.D0.c up 14.5*$r 
 box "Remessa TCE" bold big fit  with .sw at START.end
+```
+
+
+### Example 16
+
+
+```{pikchr}
+#| fontSize: 70%
+/*
+ Example 16. André Leite (leite@castlab.org)
+ */        
+
+B1: box "Etapa 1" bold "Revisão Bibliográfica" wid 2 rad .1 
+arrow
+B2: box "Etapa 2" bold "Definição do Objeto de Estudo" wid 2 rad .1 
+arrow right then down 1 then left rad .2 
+B3: box "Etapa 3" bold "Coleta de Dados" wid 2 rad .1 
+arrow
+B4: box "Etapa 4" bold "Análise de Dados" wid 2 rad .1
+arrow left then down 1 then right rad .2
+B5: box "Etapa 5" bold "Propostas e Diretrizes" wid 2 rad .1 
+arrow
+B6: box "Etapa 6" bold "Validação das Diretrizes" wid 2 rad .1 
+arrow right then down 1 then left until even with B6.c rad .2
+B7: box "Etapa 7" bold "Apresentação dos Resultados" wid 2 rad .1
+
+```
+
+
+### Example 17
+
+```{pikchr}
+#| width: 500
+#| fontFamily: Akronim
+#| fontSize: 50%
+# fontSize: 50%
+# fontFamily: Akronim 
+
+/*
+ Example 17. André Leite (leite@castlab.org)
+ */         
+
+lgt = .2
+
+define half_hex_down { 
+    A:line down $1*(sqrt(3)/2) right $1/2 \
+        then left 2*$1 \
+        then up $1*(sqrt(3)/2) right $1/2 \
+        close color $3 fill $4
+    text $2 at last .c color $5
+}
+
+define half_hex_up { 
+    A:line  down $1*(sqrt(3)/2) left  $1/2 \
+        then left $1 \
+        then up $1*(sqrt(3)/2) left $1/2 \
+        close color $3 fill $4
+    text $2 at last .c color $5
+}
+
+HD: [half_hex_down(lgt ,  "Rapid", 0x0070c0, white, 0x0070c0)]
+
+HU: [half_hex_up(lgt ,  "Fuzz" italic, 0x0070c0, 0x0070c0, white)] \
+  with .n at .0175 above HD.s 
+```
+
+### Example 18
+
+```{pikchr}
+#| echo: true
+#| width: 25%
+#| height: auto
+#| align: center
+#| fontSize: 50%
+#| fontFamily: MonteCarlo
+
+/*
+ Example 18. André Leite (leite@castlab.org)
+ */  
+
+lgt = .2
+
+define hex_up { 
+    A:line right $1*(sqrt(3)/2) down $1/2 \
+        then down $1 \
+        then down $1/2 left $1*(sqrt(3)/2) \
+        then up $1/2 left $1*(sqrt(3)/2) \
+        then up $1 \
+        then right $1*(sqrt(3)/2) up $1/2 \
+        close color $3 fill $4
+    text $2 at last .c color $5
+}
+
+define hex_dgr {
+   P:(0,0)
+   C1: circle rad .01 with .c at P.c thin color $2
+   C2: circle rad .01 with .c at C1.c + ($1*(sqrt(3)/2), -$1/2) thin color $2
+   C3: circle rad .01 with .c at C2.c + (0, -$1) thin  color $2
+   C4: circle rad .01 with .c at C3.c + (-$1*(sqrt(3)/2), -$1/2) thin color $2
+   C5: circle rad .01 with .c at C4.c + (-$1*(sqrt(3)/2), $1/2) thin color $2
+   C6: circle rad .01 with .c at C5.c + (0, $1) thin color $2
+   L1: line from C1.se to C2.nw thin color $2
+   L2: line from C2.s to C3.n thin color $2
+   L3: line from C3.sw to C4.ne thin color $2
+   L4: line from C4.nw to C5.se thin color $2
+   L5: line from C5.n to C6.s thin color $2
+   L6: line from C6.ne to C1.sw thin color $2
+   
+}
+
+
+H2: [hex_up(lgt ,  "Pikchr" small, 0x196F3D, 0x27AE60, white)]
+H3: [hex_dgr(lgt*.8, 0x7DCEA0)] with .c at H2.c
+H4: [hex_dgr(lgt*.6, 0x52BE80)] with .c at H2.c
 ```
