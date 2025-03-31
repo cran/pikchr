@@ -1,8 +1,8 @@
 Type: Package
 Package: pikchr
 Title: R Wrapper for 'pikchr' (PIC) Diagram Language
-Version: 1.0
-Date: 2024-12-01
+Version: 1.0.1
+Date: 2025-03-31
 Authors@R: c(
             person("Andre", "Leite", email = "leite@castlab.org", role = c("aut", "cre")),
             person("Hugo", "Vaconcelos", email = "hugo.vasconcelos@ufpe.br", role = "aut"),
@@ -22,11 +22,11 @@ Depends: R (>= 4.0)
 LazyData: true
 Config/Needs/website: tidyverse/tidytemplate, rmarkdown
 NeedsCompilation: yes
-Packaged: 2024-12-02 12:16:10 UTC; leite
+Packaged: 2025-03-31 13:59:02 UTC; leite
 Author: Andre Leite [aut, cre],
   Hugo Vaconcelos [aut],
   Richard Hipp [ctb],
   Brian Kernighan [ctb]
 Maintainer: Andre Leite <leite@castlab.org>
 Repository: CRAN
-Date/Publication: 2024-12-02 12:30:35 UTC
+Date/Publication: 2025-03-31 14:10:02 UTC

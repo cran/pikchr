@@ -1,6 +1,6 @@
-0e104603a0110f450243506689c653ea *DESCRIPTION
+282b20c565e9ff8a28b233f46322016c *DESCRIPTION
 a39320900a8084d02a1a228f79abf150 *NAMESPACE
-72f1329f4cccf6cdb0ced68981731c92 *NEWS.md
+282054b102851a03049a29d3b76506b2 *NEWS.md
 f5ec654949f31b3b2975bcadcd6318d7 *R/engine.R
 6d33780f9da73308c296646b96336689 *R/pikchrWrappers.R
 01a988d67a758e97a771a31cf04ada49 *R/zzz.R
@@ -9,10 +9,10 @@ f5ec654949f31b3b2975bcadcd6318d7 *R/engine.R
 77ac338035e860148d30d9fb7bbe8704 *data/google_fonts.rda
 501f113b8bf32b2d1d3c4bde0cabe70e *inst/doc/Examples.R
 f1b6d7defefd55534197a7af003b58ed *inst/doc/Examples.Rmd
-d38612f58ff529c6228b3041dcfada28 *inst/doc/Examples.html
+f1491da62315cd52180abb00075b7050 *inst/doc/Examples.html
 6429d0030c602ca2f96dcf22f2f2c506 *inst/doc/userman.R
 1394e68c06e28994920c45eaeb082cfc *inst/doc/userman.Rmd
-7cde7f16e79b7d7b1f8e6fb46d2eaf1f *inst/doc/userman.html
+abe3c50767b4566a439b68c3c5c330fc *inst/doc/userman.html
 91945ee43f2e699f8e80f95f6f067367 *man/eng_pikchr.Rd
 699e2be26916592b8f1290a3bb98b5b3 *man/eng_pikchr_validate_options.Rd
 bbadbfed77bbd76835e50ee827a54950 *man/figures/fig1.png
@@ -25,6 +25,6 @@ c37e5572d5f6d05c90a1ed283606825d *man/google_fonts.Rd
 a8bd101d64db22a866d52e1fcb1872d0 *man/pikchr.Rd
 75cbf6501368e358c4b9995663444822 *man/run_hook_plot.Rd
 3a67da75ca9d13f47e637d53b735f646 *src/init.c
-03c405a0e6d3de55d75af176ef384ff7 *src/pikchr.c
+8b0da95c7c355a314996b9dd77eb8167 *src/pikchr.c
 f1b6d7defefd55534197a7af003b58ed *vignettes/Examples.Rmd
 1394e68c06e28994920c45eaeb082cfc *vignettes/userman.Rmd
