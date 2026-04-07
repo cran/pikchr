@@ -6,14 +6,14 @@ knitr::opts_chunk$set(
 
 ## ----setup, echo=FALSE, message=FALSE-----------------------------------------
 library(knitr)
-library(tidyverse)
 library(kableExtra)
 library(pikchr)
 
 ## -----------------------------------------------------------------------------
-tibble(
+kable_paper(kbl(data.frame(
   `Layout Direction` = c('right', 'down', 'left', 'up'),
   `.start` = c('.w', '.n', '.e', '.s'),
-  `.end`  = c('.e', '.s', '.w', '.n')
-) %>% kbl() %>% kable_paper(full_width = FALSE)
+  `.end`  = c('.e', '.s', '.w', '.n'),
+  check.names = FALSE
+)), full_width = FALSE)
 
